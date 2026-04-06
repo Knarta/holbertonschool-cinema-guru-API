@@ -1,50 +1,50 @@
-import { useState } from 'react';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import Button from './components/general/Button.jsx';
-import Input from './components/general/Input.jsx';
-import SearchBar from './components/general/SearchBar.jsx';
-import SelectInput from './components/general/SelectInput.jsx';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import './index.css';
+
+function Authentication() {
+    return null;
+}
+
+function Dashboard() {
+    return null;
+}
 
 function App() {
-    const [email, setEmail] = useState('');
-    const [title, setTitle] = useState('');
-    const [sort, setSort] = useState('default');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userUsername, setUserUsername] = useState('');
 
-    const sortOptions = [
-        { value: 'default', label: 'Default' },
-        { value: 'latest', label: 'Latest' },
-        { value: 'oldest', label: 'Oldest' },
-        { value: 'highest-rated', label: 'Highest Rated' },
-        { value: 'lowest-rated', label: 'Lowest Rated' },
-    ];
+    useEffect(() => {
+        const checkAccessToken = async () => {
+            const accessToken = localStorage.getItem('accessToken');
 
-    return (
-        <div className="App demo-page">
-            <h1>Cinema Guru</h1>
+            if (!accessToken) {
+                return;
+            }
 
-            <div className="demo-grid">
-                <Input
-                    label="Username"
-                    type="text"
-                    value={email}
-                    setValue={setEmail}
-                    icon={faMagnifyingGlass}
-                    inputAttributes={{ placeholder: 'Username' }}
-                />
+            try {
+                const response = await axios.post(
+                    '/api/auth/',
+                    {},
+                    {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                        },
+                    },
+                );
 
-                <SelectInput
-                    label="Sort"
-                    options={sortOptions}
-                    value={sort}
-                    setValue={setSort}
-                />
+                setIsLoggedIn(true);
+                setUserUsername(response.data.username);
+            } catch (error) {
+                setIsLoggedIn(false);
+                setUserUsername('');
+            }
+        };
 
-                <SearchBar title={title} setTitle={setTitle} />
+        checkAccessToken();
+    }, []);
 
-                <Button label="Load More" onClick={() => {}} />
-            </div>
-        </div>
-    );
+    return isLoggedIn ? <Dashboard userUsername={userUsername} /> : <Authentication />;
 }
 
 export default App;
