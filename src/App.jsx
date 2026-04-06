@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './index.css';
+import Authentication from './routes/auth/Authentication.jsx';
 
-function Authentication() {
-    return null;
-}
-
-function Dashboard() {
-    return null;
+function Dashboard({ userUsername }) {
+    return <div className="App">Welcome {userUsername}</div>;
 }
 
 function App() {
@@ -44,7 +41,11 @@ function App() {
         checkAccessToken();
     }, []);
 
-    return isLoggedIn ? <Dashboard userUsername={userUsername} /> : <Authentication />;
+    return isLoggedIn ? (
+        <Dashboard userUsername={userUsername} />
+    ) : (
+        <Authentication setIsLoggedIn={setIsLoggedIn} setUserUsername={setUserUsername} />
+    );
 }
 
 export default App;

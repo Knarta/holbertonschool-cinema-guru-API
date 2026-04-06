@@ -8,6 +8,9 @@ function Input({
     value,
     setValue,
     icon = null,
+    endIcon = null,
+    onEndIconClick = null,
+    showEndIcon = true,
     inputAttributes = {},
 }) {
     const handleInput = (event) => {
@@ -26,6 +29,16 @@ function Input({
                     onChange={handleInput}
                     {...inputAttributes}
                 />
+                {endIcon && showEndIcon ? (
+                    <button
+                        type="button"
+                        className="input-end-icon-button"
+                        onClick={onEndIconClick}
+                        aria-label="Toggle input visibility"
+                    >
+                        <FontAwesomeIcon icon={endIcon} className="input-end-icon" />
+                    </button>
+                ) : null}
             </div>
         </div>
     );

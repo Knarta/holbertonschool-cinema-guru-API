@@ -79,6 +79,23 @@
     margin-right: 8px;
 }
 
+.input-end-icon-button {
+    align-items: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: #9c9c9c;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    margin-left: 8px;
+    padding: 0;
+}
+
+.input-end-icon {
+    font-size: 14px;
+}
+
 .input-component-field {
     color: #000000;
     font-family: Roboto, sans-serif;
