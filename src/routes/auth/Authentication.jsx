@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import Button from '../../components/general/Button.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
@@ -9,9 +10,26 @@ function Authentication({ setIsLoggedIn, setUserUsername }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const route = _switch ? '/api/auth/login' : '/api/auth/register';
+
+        try {
+            const response = await axios.post(route, { username, password });
+            const accessToken = response.data.accessToken;
+
+            localStorage.setItem('accessToken', accessToken);
+            setUserUsername(username);
+            setIsLoggedIn(true);
+        } catch (error) {
+            setIsLoggedIn(false);
+        }
+    };
+
     return (
         <div className="authentication-page">
-            <form className="authentication-form">
+            <form className="authentication-form" onSubmit={handleSubmit}>
                 <div className="authentication-header">
                     <Button
                         label="Sign In"
@@ -49,8 +67,6 @@ function Authentication({ setIsLoggedIn, setUserUsername }) {
                     )}
                 </div>
             </form>
-            <input type="hidden" value={Boolean(setIsLoggedIn)} readOnly />
-            <input type="hidden" value={Boolean(setUserUsername)} readOnly />
         </div>
     );
 }
