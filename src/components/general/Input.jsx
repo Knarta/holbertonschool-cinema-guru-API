@@ -15,11 +15,12 @@ function Input({
     };
 
     return (
-        <div className={`input-group ${className}`.trim()}>
-            {label ? <label className="input-label">{label}</label> : null}
-            <div className="input-wrapper">
+        <div className={`input-group input-component ${className}`.trim()}>
+            {label ? <label className="input-label input-component-label">{label}</label> : null}
+            <div className="input-wrapper input-component-wrapper">
                 {icon ? <FontAwesomeIcon icon={icon} className="input-icon" /> : null}
                 <input
+                    className="input-component-field"
                     type={type}
                     value={value}
                     onChange={handleInput}
