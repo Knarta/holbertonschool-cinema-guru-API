@@ -1,0 +1,229 @@
+/* Movies components styles */
+
+.movies-filter {
+    width: 100%;
+    background: transparent;
+    padding: 6px 6px 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 24px;
+    align-items: start;
+}
+
+.movies-filter-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.movies-filter-controls {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.movies-filter-controls .input-group {
+    width: 200px;
+}
+
+.movies-filter-years {
+    display: flex;
+    gap: 16px;
+}
+
+.movies-filter-years .input-group,
+.movies-filter .input-group {
+    min-width: 120px;
+    margin: 0;
+}
+
+.movies-filter-years .input-label,
+.movies-filter .input-label {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.movies-filter-years .input-wrapper,
+.movies-filter .input-wrapper {
+    width: 200px;
+    height: 22px;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    background: #2c2c2c;
+    padding: 0 8px;
+}
+
+.movies-filter-years .input-component-field,
+.movies-filter .input-wrapper select {
+    background: transparent;
+    color: #ffffff;
+    font-size: 12px;
+    height: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.movies-filter .search-bar-wrapper {
+    width: 535px;
+    height: 28px;
+    border-radius: 15px;
+    background: #2c2c2c;
+    border: none;
+    padding: 0 10px;
+}
+
+.movies-filter .search-bar {
+    color: #ffffff;
+    font-size: 12px;
+    height: 100%;
+}
+
+.movies-filter-tags {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 7px 9px;
+    align-items: flex-start;
+    max-width: 520px;
+}
+
+.tag,
+.tag-filter {
+    list-style: none;
+    min-width: 76px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 15px;
+    background-color: #2c2c2c;
+    border: 1px solid #e31c25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.tag-selected {
+    background-color: #e31c25;
+    color: #ffffff;
+}
+
+.movie-card {
+    list-style: none;
+    background: #1f2128;
+    border-radius: 4px;
+    overflow: hidden;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 398px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transform-origin: center center;
+}
+
+.movie-card:hover {
+    transform: scale(1.13);
+    z-index: 2;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.movies-grid {
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+    gap: 14px;
+}
+
+.movie-card-poster-wrapper {
+    width: 100%;
+    height: 230px;
+    background: #2c2c2c;
+}
+
+.movie-card-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.movie-card-actions {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+}
+
+.movie-card-action {
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.movie-card-action.active {
+    color: #e31c25;
+}
+
+.movie-card-title {
+    margin: 10px 10px 6px;
+    font-size: 42px;
+    line-height: 1;
+}
+
+.movie-card-synopsis {
+    margin: 0 10px 10px;
+    color: #d8d8d8;
+    width: 277px;
+    height: 39px;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 12.8px;
+    letter-spacing: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.movie-card-genres {
+    margin: auto 10px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.movie-card-genre-tag {
+    min-width: 47px;
+    height: 16px;
+    padding: 0 10px;
+    border-radius: 8px;
+    background-color: #e31c25;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-transform: capitalize;
+}
