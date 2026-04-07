@@ -14,3 +14,17 @@
 .dashboard-content {
     padding: 24px;
 }
+
+.dashboard-page-title {
+    width: fit-content;
+    margin: 0 auto 16px;
+    color: #ffffff;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 63px;
+    line-height: 64px;
+    letter-spacing: 0;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e31c25;
+}

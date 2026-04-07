@@ -173,11 +173,21 @@
 }
 
 .movie-card-action {
-    cursor: pointer;
-    color: #ffffff;
+    color: inherit;
 }
 
-.movie-card-action.active {
+.movie-card-action-button {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.movie-card-action-button.active {
     color: #e31c25;
 }
 

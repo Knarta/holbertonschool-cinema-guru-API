@@ -17,6 +17,12 @@ router.get('/watchLater/', verifyToken, (req, res) => {
     }).catch(err => res.status(500).send(err))
 })
 
+router.get('/watchlater/', verifyToken, (req, res) => {
+    User.findOne({ where: { id: req.userId }, include: { model: Title, as: "watchLater" } }).then(user => {
+        res.send(user.watchLater)
+    }).catch(err => res.status(500).send(err))
+})
+
 router.post('/favorite/:imdbId', verifyToken, (req, res) => {
     const { imdbId } = req.params
     User.findOne({ where: { id: req.userId }, include: { model: Title, as: "favorite" } }).then(user => {
@@ -49,6 +55,23 @@ router.post('/watchlater/:imdbId', verifyToken, (req, res) => {
     }).catch(err => res.status(500).send(err))
 })
 
+router.post('/watchLater/:imdbId', verifyToken, (req, res) => {
+    const { imdbId } = req.params
+    User.findOne({ where: { id: req.userId }, include: { model: Title, as: "watchLater" } }).then(user => {
+        Title.findOne({ where: { imdbId } }).then(async title => {
+            try {
+                await user.addWatchLater(title, { as: "watchLater" })
+                await UserActivity.create({
+                    userId: user.id,
+                    TitleId: title.id,
+                    activityType: "watchLater"
+                })
+                res.send(user.watchLater)
+            } catch (error) { res.status(500).send(error) }
+        }).catch(err => res.status(500).send(err))
+    }).catch(err => res.status(500).send(err))
+})
+
 router.delete('/favorite/:imdbId', verifyToken, async (req, res) => {
     const { imdbId } = req.params
     try {
@@ -65,6 +88,21 @@ router.delete('/favorite/:imdbId', verifyToken, async (req, res) => {
 })
 
 router.delete('/watchlater/:imdbId', verifyToken, async (req, res) => {
+    const { imdbId } = req.params
+    try {
+        const title = await Title.findOne({ where: { imdbId } })
+        const user = await User.findOne({ where: { id: req.userId } })
+        await (await UserWatchLater.findOne({ where: { UserId: req.userId, TitleId: title.id } })).destroy()
+        const userActivity = await UserActivity.create({
+            userId: user.id,
+            TitleId: title.id,
+            activityType: "removeWatchLater"
+        })
+        res.send(userActivity)
+    } catch (error) { res.status(500).send(error) }
+})
+
+router.delete('/watchLater/:imdbId', verifyToken, async (req, res) => {
     const { imdbId } = req.params
     try {
         const title = await Title.findOne({ where: { imdbId } })
