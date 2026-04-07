@@ -1,2 +1,16 @@
-/* Dashboard component styles */
 /* Dashboard route styles */
+
+.dashboard {
+    min-height: 100vh;
+    background-color: #222222;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-width, 50px) 1fr;
+    min-height: calc(100vh - 46px);
+}
+
+.dashboard-content {
+    padding: 24px;
+}
