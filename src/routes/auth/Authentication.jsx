@@ -17,11 +17,18 @@ function Authentication({ setIsLoggedIn, setUserUsername }) {
 
         try {
             const response = await axios.post(route, { username, password });
-            const accessToken = response.data.accessToken;
-
-            localStorage.setItem('accessToken', accessToken);
-            setUserUsername(username);
-            setIsLoggedIn(true);
+            if (_switch) {
+                const accessToken = response.data.accessToken;
+                localStorage.setItem('accessToken', accessToken);
+                setUserUsername(username);
+                setIsLoggedIn(true);
+            } else {
+                // After successful account creation, return to Sign In flow.
+                localStorage.removeItem('accessToken');
+                setPassword('');
+                setSwitch(true);
+                setIsLoggedIn(false);
+            }
         } catch (error) {
             setIsLoggedIn(false);
         }
@@ -44,6 +51,8 @@ function Authentication({ setIsLoggedIn, setUserUsername }) {
                         className={`auth-switch-button ${!_switch ? 'auth-switch-button-active' : ''}`}
                         onClick={(event) => {
                             event.preventDefault();
+                            localStorage.removeItem('accessToken');
+                            setIsLoggedIn(false);
                             setSwitch(false);
                         }}
                     />

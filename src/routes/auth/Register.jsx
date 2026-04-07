@@ -39,7 +39,7 @@ function Register({ username, password, setUsername, setPassword }) {
                 inputAttributes={{ placeholder: '' }}
             />
             <div className="login-submit-row">
-                <Button label="Sign Up" icon={faPlus} className="login-submit-button" onClick={() => {}} />
+                <Button label="Sign Up" icon={faPlus} className="login-submit-button" type="submit" />
             </div>
         </div>
     );

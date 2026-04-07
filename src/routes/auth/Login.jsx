@@ -39,7 +39,7 @@ function Login({ username, password, setUsername, setPassword }) {
                 inputAttributes={{ placeholder: '' }}
             />
             <div className="login-submit-row">
-                <Button label="Sign In" icon={faKey} className="login-submit-button" onClick={() => {}} />
+                <Button label="Sign In" icon={faKey} className="login-submit-button" type="submit" />
             </div>
         </div>
     );

@@ -1,11 +1,14 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 require('dotenv').config();
-const { JWT_TOKEN_SECRET, TOKEN_EXPIRE_SECONDS } = process.env
+const {
+    JWT_TOKEN_SECRET = 'dev_jwt_secret_change_me',
+    TOKEN_EXPIRE_SECONDS = '3600',
+} = process.env;
 
 const generateToken = async (userId, username) => {
     return new Promise((resolve, reject) => {
-        jwt.sign({ userId, username }, JWT_TOKEN_SECRET, { expiresIn: parseInt(TOKEN_EXPIRE_SECONDS) }, (err, token) => {
+        jwt.sign({ userId, username }, JWT_TOKEN_SECRET, { expiresIn: parseInt(TOKEN_EXPIRE_SECONDS, 10) }, (err, token) => {
             if (err) {
                 reject(new Error('Token generation unsuccessful'))
             }
